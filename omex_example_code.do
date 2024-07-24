@@ -2,16 +2,16 @@
 # Example code for linear mixed models for continues outcomes (baseline adjustment according to Twisk 2018)
 # Example code for modified possion regression for binary outcomes (according to Zou 2004 )
 ********************************************************************************
-*							1) OARSI sum score								   *
+* 1) OARSI sum score *
 ********************************************************************************
-import delimited "/prepared_datasets/omex_oarsi.csv"
+import delimited "/prepared_datasets/omex_oarsi.csv", clear
 
 mixed oarsi_sum_inj i.time i.gender i.treat#i(60,120).time || id: 
 
 ********************************************************************************
-*								2) KOOS										   *
+* 2) KOOS *
 ********************************************************************************
-import delimited "/prepared_datasets/omex_koos.csv"
+import delimited "/prepared_datasets/omex_koos.csv", clear
 
 * KOOS4 *
 mixed koos4 i.time i.sex i.treat#i(3,12,24,60,120).time || id: 
@@ -32,9 +32,9 @@ mixed sport i.time i.sex i.treat#i(3,12,24,60,120).time || id:
 mixed qol i.time i.sex i.treat#i(3,12,24,60,120).time || id:
 
 ********************************************************************************
-*							3) Knee muscle strength							   *
+* 3) Knee muscle strength *
 ********************************************************************************
-import delimited "/prepared_datasets/omex_isokinetic.csv"
+import delimited "/prepared_datasets/omex_isokinetic.csv", clear
 
 * Quadriceps *
 mixed pt_ext i.time i.sex i.treat#i(3,12,60,120).time || id: 
@@ -44,9 +44,9 @@ mixed pt_flex i.time i.sex i.treat#i(3,12,60,120).time || id:
 
 
 ********************************************************************************
-*							4) Knee OA incidence							   *
+* 4) Knee OA incidence *
 ********************************************************************************
-import delimited "/prepared_datasets/omex_kl.csv"
+import delimited "/prepared_datasets/omex_kl.csv", clear
 
 * Radiographic *
 glm oa_inc_inj_10y i.gender ib666.treat, fam(poisson) link(log) vce(robust) nolog eform
@@ -57,6 +57,7 @@ margins, dydx(intervention)
 glm oa_sympt_inc_10y i.gender ib666.treat, fam(poisson) link(log) vce(robust) nolog eform
 margins, dydx(intervention)
 
+clear 
 ********************************************************************************
 ********************************************************************************
 ********************************************************************************
